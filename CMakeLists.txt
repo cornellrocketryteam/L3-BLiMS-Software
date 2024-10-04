@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.22)
 # Pull in SDK (must be before project)
 include(lib/pico-sdk/pico_sdk_init.cmake)
 
-project(template C CXX ASM)
+project(blims C CXX ASM)
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 17)
 
@@ -20,11 +20,44 @@ add_compile_options(
 # Add all executables
 add_executable(${PROJECT_NAME}
     src/main.cpp
+    src/core/flight.cpp
+    src/core/state.cpp
+    src/core/modules.cpp
+    src/sd/sd.cpp
+    src/sd/hw_config.c
+)
+
+# Add external libraries
+add_subdirectory(${PROJECT_SOURCE_DIR}/lib/no-OS-FatFS-SD-SDIO-SPI-RPi-Pico/src build)
+add_subdirectory(${PROJECT_SOURCE_DIR}/lib/BMP388-Pico)
+add_subdirectory(${PROJECT_SOURCE_DIR}/lib/BNO055-Pico)
+add_subdirectory(${PROJECT_SOURCE_DIR}/lib/LIS3DH-Pico)
+
+# Link library directories
+target_link_directories(${PROJECT_NAME} 
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/lib/BMP388-Pico
+    ${PROJECT_SOURCE_DIR}/lib/BNO055-Pico
+    ${PROJECT_SOURCE_DIR}/lib/LIS3DH-Pico
+)
+
+# Include library headers
+target_include_directories(${PROJECT_NAME}
+    PRIVATE
+    ${PROJECT_SOURCE_DIR}/lib/BMP388-Pico
+    ${PROJECT_SOURCE_DIR}/lib/BNO055-Pico
+    ${PROJECT_SOURCE_DIR}/lib/LIS3DH-Pico
 )
 
 # Pull in common dependencies
 target_link_libraries(${PROJECT_NAME} 
-    pico_stdlib
+    pico_stdlib 
+    hardware_i2c 
+    hardware_gpio
+    FatFs_SPI 
+    BMP388-Pico
+    BNO055-Pico
+    LIS3DH-Pico 
 )
 
 # Enable serial over USB

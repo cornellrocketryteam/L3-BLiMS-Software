@@ -1,6 +1,6 @@
 /**
  * @file pins.hpp
- * @author YOUR NETID HERE
+ * @author gb486, csg83
  *
  * @brief GPIO pin definitions for the Pico
  */

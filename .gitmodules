@@ -1,3 +1,12 @@
 [submodule "lib/pico-sdk"]
 	path = lib/pico-sdk
 	url = git@github.com:raspberrypi/pico-sdk.git
+[submodule "lib/BMP388-Pico"]
+	path = lib/BMP388-Pico
+	url = git@github.com:cornellrocketryteam/BMP388-Pico.git
+[submodule "lib/BNO055-Pico"]
+	path = lib/BNO055-Pico
+	url = git@github.com:cornellrocketryteam/BNO055-Pico.git
+[submodule "lib/LIS3DH-Pico"]
+	path = lib/LIS3DH-Pico
+	url = git@github.com:cornellrocketryteam/LIS3DH-Pico.git

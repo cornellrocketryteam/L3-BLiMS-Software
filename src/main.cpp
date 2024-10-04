@@ -1,6 +1,6 @@
 /**
  * @file main.cpp
- * @author YOUR NETID HERE
+ * @author gb486, csg83
  * 
  * @brief The entry point for the program
  */
